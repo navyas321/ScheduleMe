@@ -6,8 +6,13 @@ public class Course {
     private String mLocation;
 
     private class Schedule{
-        private enum String {
-            "Monday", "Tuesday", "Wednesday", "Thursday". "Friday", "Saturday", "Sunday"}
+
+        enum Day {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}
+
+        private Day[] daysOfTheWeek;
+
+
+
 
     }
 }
