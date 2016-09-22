@@ -7,12 +7,17 @@ public class Course {
 
     enum Day {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}
 
-    private String courseName;
+    private String courseName; //FORMAT: "<dept acronym>-<course number>" eg. "CS-296"
+
     private int creditHours;
+
     private String lectureLocation;
     private String discussionLocation;
     private String labLocation;
+
     private Schedule courseSchedule;
+
+
 
     private boolean lectureComponent; //To validate if a lecture component exists
     private boolean discussionComponent; //To validate if a discussion component exists
@@ -36,8 +41,33 @@ public class Course {
         String labStartTime;
         String labEndTIme;
 
-
-
+        public String getLectureStartTIme() {
+            return lectureStartTime;
+        }
+        public String getLectureEndTime() {
+            return lectureEndTime;
+        }
+        public String getDiscussionStartTime() {
+            return discussionStartTime;
+        }
+        public String getDiscussionEndTime() {
+            return discussionEndTime;
+        }
+        public String getLabStartTime() {
+            return labStartTime;
+        }
+        public String getLabEndTIme() {
+            return labEndTIme;
+        }
+        public Day[] getDaysOfTheWeekLecture() {
+            return daysOfTheWeekLecture;
+        }
+        public Day[] getDaysOfTheWeekDiscussion() {
+            return daysOfTheWeekDiscussion;
+        }
+        public Day[] getDaysOfTheWeekLab() {
+            return daysOfTheWeekLab;
+        }
 
 
 
