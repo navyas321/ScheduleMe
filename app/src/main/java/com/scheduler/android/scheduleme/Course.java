@@ -1,7 +1,9 @@
 package com.scheduler.android.scheduleme;
 
 
+import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Course {
 
@@ -17,6 +19,10 @@ public class Course {
 
     private Schedule courseSchedule;
 
+    private ArrayList<Date> impDates;
+    private ArrayList<String> infoImpDates;
+
+    //need to figure a way to store office hours, important dates and syllabus.
 
 
     private boolean lectureComponent; //To validate if a lecture component exists
@@ -72,4 +78,6 @@ public class Course {
 
 
     }
+
+
 }
