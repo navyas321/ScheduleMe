@@ -36,7 +36,7 @@ public class Course {
         private class Lecture{
             Day day;
             Time StartTime;
-            Time EndTime;
+            Time EndTime; // Saul
         }
 
         private class Discuss{
