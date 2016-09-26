@@ -33,8 +33,25 @@ public class Course {
 
     private class Schedule{
 
+        private class Lecture{
+            Day day;
+            Time StartTime;
+            Time EndTime;
+        }
 
-        Day[] daysOfTheWeekLecture;
+        private class Discuss{
+            Day day;
+            Time StartTime;
+            Time EndTime;
+        }
+
+        private class Lab{
+            Day day;
+            Time StartTime;
+            Time EndTime;
+        }
+
+        /*Day[] daysOfTheWeekLecture;
         Day[] daysOfTheWeekDiscussion;
         Day[] daysOfTheWeekLab;
 
@@ -73,7 +90,7 @@ public class Course {
         }
         public Day[] getDaysOfTheWeekLab() {
             return daysOfTheWeekLab;
-        }
+        }*/
 
 
 
