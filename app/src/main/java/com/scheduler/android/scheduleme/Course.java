@@ -20,7 +20,7 @@ public class Course {
     private Schedule courseSchedule;
 
     private ArrayList<Date> impDates;
-    private ArrayList<String> infoImpDates;
+    private ArrayList<String> infoImpDates; //these two should be the same size.
 
     //need to figure a way to store office hours, important dates and syllabus.
 
@@ -36,7 +36,7 @@ public class Course {
         private class Lecture{
             Day day;
             Time StartTime;
-            Time EndTime; // Saul
+            Time EndTime;
         }
 
         private class Discuss{

@@ -1,34 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.scheduler.android.scheduleme.MainActivity">
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_main" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@mipmap/syllabus_scanner_icon"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="105dp"
+        android:id="@+id/syllabusScannerButton" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_below="@+id/scheduleButton"
+        android:layout_alignLeft="@+id/scheduleButton"
+        android:layout_alignStart="@+id/scheduleButton"
+        android:layout_marginTop="40dp"
+        android:id="@+id/gpaButton" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_alignBottom="@+id/gpaButton"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/studyRoomButton" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/impDatesButton"
+        android:layout_alignTop="@+id/syllabusScannerButton"
+        android:layout_toRightOf="@+id/syllabusScannerButton"
+        android:layout_toEndOf="@+id/syllabusScannerButton"
+        android:layout_marginLeft="39dp"
+        android:layout_marginStart="39dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/officeHrsButton"
+        android:layout_alignTop="@+id/studyRoomButton"
+        android:layout_alignLeft="@+id/impDatesButton"
+        android:layout_alignStart="@+id/impDatesButton" />
+
+    <TextView
+        android:text="Syllabus Scanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/syllabusScannerTextBox"
+        android:layout_below="@+id/syllabusScannerButton"
+        android:layout_alignLeft="@+id/syllabusScannerButton"
+        android:layout_alignStart="@+id/syllabusScannerButton"
+        android:layout_alignRight="@+id/syllabusScannerButton"
+        android:layout_alignEnd="@+id/syllabusScannerButton"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="GPA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gpaTextBox"
+        android:layout_below="@+id/gpaButton"
+        android:layout_alignLeft="@+id/gpaButton"
+        android:layout_alignStart="@+id/gpaButton"
+        android:layout_alignRight="@+id/gpaButton"
+        android:layout_alignEnd="@+id/gpaButton"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="Study Room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/studyRoomTextBox"
+        android:layout_below="@+id/studyRoomButton"
+        android:layout_alignLeft="@+id/studyRoomButton"
+        android:layout_alignStart="@+id/studyRoomButton"
+        android:layout_alignRight="@+id/studyRoomButton"
+        android:layout_alignEnd="@+id/studyRoomButton"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="Office Hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/officeHrsTextBox"
+        android:layout_below="@+id/officeHrsButton"
+        android:layout_alignLeft="@+id/officeHrsButton"
+        android:layout_alignStart="@+id/officeHrsButton"
+        android:layout_alignRight="@+id/officeHrsButton"
+        android:layout_alignEnd="@+id/officeHrsButton"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="Schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scheduleTextBox"
+        android:layout_below="@+id/scheduleButton"
+        android:layout_alignLeft="@+id/scheduleButton"
+        android:layout_alignStart="@+id/scheduleButton"
+        android:layout_alignRight="@+id/scheduleButton"
+        android:layout_alignEnd="@+id/scheduleButton"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="Important Dates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/impDatesTextBox"
+        android:layout_below="@+id/impDatesButton"
+        android:layout_alignLeft="@+id/impDatesButton"
+        android:layout_alignStart="@+id/impDatesButton"
+        android:textAlignment="center"
+        android:layout_alignRight="@+id/impDatesButton"
+        android:layout_alignEnd="@+id/impDatesButton" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/schedule_icon"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:id="@+id/scheduleButton"
+        android:layout_alignTop="@+id/syllabusScannerButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
