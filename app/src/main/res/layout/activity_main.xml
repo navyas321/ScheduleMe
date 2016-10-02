@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:text="Syllabus Scanner"
+        android:text="@string/syllabus_scanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/syllabusScannerTextBox"
@@ -19,7 +19,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:text="GPA"
+        android:text="@string/gpa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/gpaTextBox"
@@ -31,7 +31,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:text="Study Room"
+        android:text="@string/study_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/studyRoomTextBox"
@@ -43,7 +43,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:text="Office Hours"
+        android:text="@string/office_hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/officeHrsTextBox"
@@ -55,7 +55,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:text="Schedule"
+        android:text="@string/schedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/scheduleTextBox"
@@ -67,7 +67,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:text="Important Dates"
+        android:text="@string/important_dates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/impDatesTextBox"

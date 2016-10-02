@@ -1,13 +1,13 @@
 package com.scheduler.android.scheduleme;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,14 +18,29 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.my_toolbar);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        ImageButton scheduleBtn = (ImageButton) findViewById(R.id.scheduleButton);
+        scheduleBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, ScheduleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton impDatesBtn = (ImageButton) findViewById(R.id.impDatesButton);
+        scheduleBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, ImportantDatesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton gpaBtn = (ImageButton) findViewById(R.id.gpaButton);
+        scheduleBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, GpaActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
