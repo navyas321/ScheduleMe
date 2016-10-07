@@ -14,9 +14,9 @@ public class CourseContract {
         public static String COLUMN_COURSE_NO = "courseNo";
         public static String COLUMN_CREDIT_HRS = "creditHrs";
         public static String COLUMN_COURSE_NAME = "courseName";
-        public static String COLUMN_SCHEDULE_ID = "scheduleID";
-        public static String COLUMN_IMP_DATES_ID = "impDatesID";
-        public static String COLUMN_OFFICE_HOURS_ID = "officeHoursID";
+        //public static String COLUMN_SCHEDULE_ID = "scheduleID";
+        //public static String COLUMN_IMP_DATES_ID = "impDatesID";
+        //public static String COLUMN_OFFICE_HOURS_ID = "officeHoursID";
         public static String TABLE_NAME_IMP_DATES = "impDates";
         public static String COLUMN_IMP_DATES_ASSOCIATED_COURSE = "impDatesAssociatedCourse";
         public static String COLUMN_IMP_DATES_INFO = "info";
