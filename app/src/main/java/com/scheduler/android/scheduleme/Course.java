@@ -1,6 +1,7 @@
 package com.scheduler.android.scheduleme;
 
 
+import java.sql.Array;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -41,15 +42,15 @@ public class Course {
         return infoImpDates;
     }
 
-    public boolean isLectureComponent() {
+    public boolean hasLectureComponent() {
         return lectureComponent;
     }
 
-    public boolean isDiscussionComponent() {
+    public boolean hasDiscussionComponent() {
         return discussionComponent;
     }
 
-    public boolean isLabComponent() {
+    public boolean hasLabComponent() {
         return labComponent;
     }
 
@@ -127,32 +128,167 @@ public class Course {
     private boolean discussionComponent; //To validate if a discussion component exists
     private boolean labComponent; //To validate if a lab component exists to the course
 
-    private class Office_Hours{
-        Day day;
-        Time startTime;
-        Time endTime;
-        String instructor_name;
+    public class Office_Hours{
+        public Day getDay() {
+            return day;
+        }
+
+        public void setDay(Day day) {
+            this.day = day;
+        }
+
+        public Time getStartTime() {
+            return startTime;
+        }
+
+        public void setStartTime(Time startTime) {
+            this.startTime = startTime;
+        }
+
+        public Time getEndTime() {
+            return endTime;
+        }
+
+        public void setEndTime(Time endTime) {
+            this.endTime = endTime;
+        }
+
+        public String getInstructor_name() {
+            return instructor_name;
+        }
+
+        public void setInstructor_name(String instructor_name) {
+            this.instructor_name = instructor_name;
+        }
+
+        private Day day;
+        private Time startTime;
+        private Time endTime;
+        private String instructor_name;
     }
 
-    private class Schedule{
+    public class Schedule{
 
-        private class Lecture{
-            Day day;
-            Time StartTime;
-            Time EndTime;
+        public class Lecture{
+            public Day getDay() {
+                return day;
+            }
+
+            public void setDay(Day day) {
+                this.day = day;
+            }
+
+            public Time getStartTime() {
+                return StartTime;
+            }
+
+            public void setStartTime(Time startTime) {
+                StartTime = startTime;
+            }
+
+            public Time getEndTime() {
+                return EndTime;
+            }
+
+            public void setEndTime(Time endTime) {
+                EndTime = endTime;
+            }
+
+            private Day day;
+            private Time StartTime;
+            private Time EndTime;
         }
 
-        private class Discussion{
-            Day day;
-            Time StartTime;
-            Time EndTime;
+        public class Discussion{
+            public Day getDay() {
+                return day;
+            }
+
+            public void setDay(Day day) {
+                this.day = day;
+            }
+
+            public Time getStartTime() {
+                return StartTime;
+            }
+
+            public void setStartTime(Time startTime) {
+                StartTime = startTime;
+            }
+
+            public Time getEndTime() {
+                return EndTime;
+            }
+
+            public void setEndTime(Time endTime) {
+                EndTime = endTime;
+            }
+
+            private Day day;
+            private Time StartTime;
+            private Time EndTime;
         }
 
-        private class Lab{
-            Day day;
-            Time StartTime;
-            Time EndTime;
+        public class Lab {
+            public Day getDay() {
+                return day;
+            }
+
+            public void setDay(Day day) {
+                this.day = day;
+            }
+
+            public Time getStartTime() {
+                return StartTime;
+            }
+
+            public void setStartTime(Time startTime) {
+                StartTime = startTime;
+            }
+
+            public Time getEndTime() {
+                return EndTime;
+            }
+
+            public void setEndTime(Time endTime) {
+                EndTime = endTime;
+            }
+
+            private Day day;
+            private Time StartTime;
+            private Time EndTime;
         }
+
+        ArrayList<Lecture> lectures;
+        ArrayList<Discussion> discussions;
+        ArrayList<Lab> labs;
+
+        public ArrayList<Lecture> getLectures() {
+            return lectures;
+        }
+
+        public void setLectures(ArrayList<Lecture> lectures) {
+            this.lectures = lectures;
+        }
+
+        public ArrayList<Discussion> getDiscussions() {
+            return discussions;
+        }
+
+        public void setDiscussions(ArrayList<Discussion> discussions) {
+            this.discussions = discussions;
+        }
+
+        public ArrayList<Lab> getLabs() {
+            return labs;
+        }
+
+        public void setLabs(ArrayList<Lab> labs) {
+            this.labs = labs;
+        }
+
+
+
 
 
 

@@ -14,6 +14,12 @@ public class CourseContract {
         public static String COLUMN_COURSE_NO = "courseNo";
         public static String COLUMN_CREDIT_HRS = "creditHrs";
         public static String COLUMN_COURSE_NAME = "courseName";
+        public static String COLUMN_LECTURE_LOCATION = "lectureLocation";
+        public static String COLUMN_DISCUSSION_LOCATION = "discussionLocation";
+        public static String COLUMN_LAB_LOCATION = "labLocation";
+        public static String COLUMN_LECTURE_COMPONENT = "hasLectureComponent";
+        public static String COLUMN_DISCUSSION_COMPONENT = "hasDiscussionComponent";
+        public static String COLUMN_LAB_COMPONENT = "hasLabComponent";
         //public static String COLUMN_SCHEDULE_ID = "scheduleID";
         //public static String COLUMN_IMP_DATES_ID = "impDatesID";
         //public static String COLUMN_OFFICE_HOURS_ID = "officeHoursID";
