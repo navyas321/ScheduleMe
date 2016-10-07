@@ -110,6 +110,16 @@ public class Course {
     private ArrayList<Date> impDates;
     private ArrayList<String> infoImpDates; //these two should be the same size.
 
+    public ArrayList<Office_Hours> getOffice_hours() {
+        return office_hours;
+    }
+
+    public void setOffice_hours(ArrayList<Office_Hours> office_hours) {
+        this.office_hours = office_hours;
+    }
+
+    private ArrayList<Office_Hours> office_hours;
+
     //need to figure a way to store office hours, important dates and syllabus.
 
 
@@ -117,7 +127,12 @@ public class Course {
     private boolean discussionComponent; //To validate if a discussion component exists
     private boolean labComponent; //To validate if a lab component exists to the course
 
-
+    private class Office_Hours{
+        Day day;
+        Time startTime;
+        Time endTime;
+        String instructor_name;
+    }
 
     private class Schedule{
 
@@ -127,7 +142,7 @@ public class Course {
             Time EndTime;
         }
 
-        private class Discuss{
+        private class Discussion{
             Day day;
             Time StartTime;
             Time EndTime;
@@ -138,47 +153,6 @@ public class Course {
             Time StartTime;
             Time EndTime;
         }
-
-        /*Day[] daysOfTheWeekLecture;
-        Day[] daysOfTheWeekDiscussion;
-        Day[] daysOfTheWeekLab;
-
-        String lectureStartTime; //FORMAT: "HH:MM"
-        String lectureEndTime;
-
-        String discussionStartTime;
-        String discussionEndTime;
-
-        String labStartTime;
-        String labEndTIme;
-
-        public String getLectureStartTIme() {
-            return lectureStartTime;
-        }
-        public String getLectureEndTime() {
-            return lectureEndTime;
-        }
-        public String getDiscussionStartTime() {
-            return discussionStartTime;
-        }
-        public String getDiscussionEndTime() {
-            return discussionEndTime;
-        }
-        public String getLabStartTime() {
-            return labStartTime;
-        }
-        public String getLabEndTIme() {
-            return labEndTIme;
-        }
-        public Day[] getDaysOfTheWeekLecture() {
-            return daysOfTheWeekLecture;
-        }
-        public Day[] getDaysOfTheWeekDiscussion() {
-            return daysOfTheWeekDiscussion;
-        }
-        public Day[] getDaysOfTheWeekLab() {
-            return daysOfTheWeekLab;
-        }*/
 
 
 
