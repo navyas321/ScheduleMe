@@ -1,10 +1,13 @@
 package com.scheduler.android.scheduleme;
 
+import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -12,6 +15,7 @@ import android.support.annotation.RequiresApi;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import static com.scheduler.android.scheduleme.Course.dayParser;
 import static com.scheduler.android.scheduleme.CourseContract.DataEntry.COLUMN_COURSE_NAME;
 import static com.scheduler.android.scheduleme.CourseContract.DataEntry.COLUMN_COURSE_NO;
 import static com.scheduler.android.scheduleme.CourseContract.DataEntry.COLUMN_CREDIT_HRS;
@@ -155,6 +159,42 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         int numRows = (int) DatabaseUtils.queryNumEntries(db, TABLE_NAME_COURSES);
         return numRows;
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    public Course getCourse(String course_name) throws Exception{
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res_courses = db.rawQuery("SELECT * FROM " + TABLE_NAME_COURSES + " WHERE " + COLUMN_COURSE_NAME + "=" + course_name + "", null);
+        res_courses.moveToFirst();
+        Cursor res_schedule = db.rawQuery("SELECT * FROM " + TABLE_NAME_SCHEDULE + " WHERE " + COLUMN_SCHEDULE_ASSOCIATED_COURSE + "=" + course_name + "", null);
+        res_schedule.moveToFirst();
+        Cursor res_imp_dates = db.rawQuery("SELECT * FROM " + TABLE_NAME_IMP_DATES + " WHERE " + COLUMN_IMP_DATES_ASSOCIATED_COURSE + "=" + course_name + "", null);
+        res_imp_dates.moveToFirst();
+        Cursor res_office_hrs = db.rawQuery("SELECT * FROM " + TABLE_NAME_OFFICE_HOURS + " WHERE " + COLUMN_OFFICE_HOURS_ASSOCIATED_COURSE + "=" + course_name + "", null);
+        res_office_hrs.moveToFirst();
+
+        ArrayList<Course.Schedule.Lecture> lectures = new ArrayList<Course.Schedule.Lecture>();
+        ArrayList<Course.Schedule.Discussion> discussions = new ArrayList<Course.Schedule.Discussion>();
+        ArrayList<Course.Schedule.Lab> labs = new ArrayList<Course.Schedule.Lab>();
+        DateFormat formatter = new SimpleDateFormat("HH:mm");
+
+        while (!res_schedule.isAfterLast()) {
+            if (res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_COMPONENT)) == "LECTURE") {
+                String day = res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_DAYS));
+                String startTime = res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_START_TIME));
+                String endTime = res_schedule.getString(res_courses.getColumnIndex(COLUMN_SCHEDULE_END_TIME));
+                lectures.add(new Course().new Schedule().new Lecture(day, startTime, endTime));
+
+            }
+            else if (res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_COMPONENT)) == "DISCUSSION") {
+
+            }
+            else if (res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_COMPONENT)) == "LAB") {
+
+            }
+            res_schedule.moveToNext();
+        }
+
     }
 
 

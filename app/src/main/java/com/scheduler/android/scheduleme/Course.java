@@ -1,14 +1,52 @@
 package com.scheduler.android.scheduleme;
 
 
+import android.annotation.TargetApi;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
+
 import java.sql.Array;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import static com.scheduler.android.scheduleme.CourseContract.DataEntry.COLUMN_SCHEDULE_START_TIME;
+
 public class Course {
 
-    enum Day {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}
+
+    public Course(String courseName, int creditHours, String lectureLocation, String discussionLocation, String labLocation, Schedule courseSchedule, ArrayList<Date> impDates, ArrayList<String> infoImpDates, ArrayList<Office_Hours> office_hours, boolean lectureComponent, boolean discussionComponent, boolean labComponent) {
+        this.courseName = courseName;
+        this.creditHours = creditHours;
+        this.lectureLocation = lectureLocation;
+        this.discussionLocation = discussionLocation;
+        this.labLocation = labLocation;
+        this.courseSchedule = courseSchedule;
+        this.impDates = impDates;
+        this.infoImpDates = infoImpDates;
+        this.office_hours = office_hours;
+        this.lectureComponent = lectureComponent;
+        this.discussionComponent = discussionComponent;
+        this.labComponent = labComponent;
+    }
+
+    enum Day {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY, NONE}
+
+    public Course(String courseName, int creditHours, String lectureLocation, String discussionLocation, String labLocation, boolean lectureComponent, boolean labComponent, boolean discussionComponent) {
+        this.courseName = courseName;
+        this.creditHours = creditHours;
+        this.lectureLocation = lectureLocation;
+        this.discussionLocation = discussionLocation;
+        this.labLocation = labLocation;
+        this.lectureComponent = lectureComponent;
+        this.labComponent = labComponent;
+        this.discussionComponent = discussionComponent;
+    }
+
+    public Course() {
+
+    }
 
     public String getCourseName() {
         return courseName;
@@ -165,9 +203,26 @@ public class Course {
         private Time startTime;
         private Time endTime;
         private String instructor_name;
+
+        public Office_Hours() {
+
+        }
+
+        public Office_Hours(Day day, Time startTime, Time endTime, String instructor_name) {
+            this.day = day;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.instructor_name = instructor_name;
+        }
     }
 
     public class Schedule{
+
+        public Schedule(ArrayList<Lecture> lectures, ArrayList<Discussion> discussions, ArrayList<Lab> labs) {
+            this.lectures = lectures;
+            this.discussions = discussions;
+            this.labs = labs;
+        }
 
         public class Lecture{
             public Day getDay() {
@@ -197,6 +252,24 @@ public class Course {
             private Day day;
             private Time StartTime;
             private Time EndTime;
+
+            public Lecture() {
+
+            }
+
+            public Lecture(Day day, Time startTime, Time endTime) {
+                this.day = day;
+                this.StartTime = startTime;
+                this.EndTime = endTime;
+            }
+
+            @TargetApi(Build.VERSION_CODES.N)
+            public Lecture(String day, String startTime, String endTime) throws Exception{
+                this.day = dayParser(day);
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+                this.StartTime = new java.sql.Time(formatter.parse(startTime).getTime());
+                this.EndTime = new java.sql.Time(formatter.parse(endTime).getTime());
+            }
         }
 
         public class Discussion{
@@ -227,6 +300,16 @@ public class Course {
             private Day day;
             private Time StartTime;
             private Time EndTime;
+
+            public Discussion() {
+
+            }
+
+            public Discussion(Day day, Time startTime, Time endTime) {
+                this.day = day;
+                this.StartTime = startTime;
+                this.EndTime = endTime;
+            }
         }
 
         public class Lab {
@@ -257,6 +340,15 @@ public class Course {
             private Day day;
             private Time StartTime;
             private Time EndTime;
+            public Lab() {
+
+            }
+
+            public Lab(Day day, Time startTime, Time endTime) {
+                this.day = day;
+                this.StartTime = startTime;
+                this.EndTime = endTime;
+            }
         }
 
         ArrayList<Lecture> lectures;
@@ -292,6 +384,31 @@ public class Course {
 
 
 
+    }
+
+    public static Day dayParser(String day) {
+        if (day.equalsIgnoreCase("M") || day.equalsIgnoreCase("MONDAY") || day.equalsIgnoreCase("MON")) {
+            return Day.MONDAY;
+        }
+        else if (day.equalsIgnoreCase("T") || day.equalsIgnoreCase("TUESDAY") || day.equalsIgnoreCase("TUE")) {
+            return Day.TUESDAY;
+        }
+        else if (day.equalsIgnoreCase("W") || day.equalsIgnoreCase("WEDNESDAY") || day.equalsIgnoreCase("WED")) {
+            return Day.WEDNESDAY;
+        }
+        else if (day.equalsIgnoreCase("R") || day.equalsIgnoreCase("THURSDAY") || day.equalsIgnoreCase("THUR")) {
+            return Day.THURSDAY;
+        }
+        else if (day.equalsIgnoreCase("F") || day.equalsIgnoreCase("FRIDAY") || day.equalsIgnoreCase("FRI")) {
+            return Day.FRIDAY;
+        }
+        else if (day.equalsIgnoreCase("SA") || day.equalsIgnoreCase("SATURDAY") || day.equalsIgnoreCase("SAT")) {
+            return Day.SATURDAY;
+        }
+        else if (day.equalsIgnoreCase("SU") || day.equalsIgnoreCase("SUNDAY") || day.equalsIgnoreCase("SUN")) {
+            return Day.SUNDAY;
+        }
+        else return Day.NONE;
     }
 
 
