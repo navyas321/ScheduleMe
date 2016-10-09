@@ -93,7 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
         for (int i = 0; i < imp_dates.size(); i++) {
             ContentValues contentValues_imp_dates = new ContentValues();
             contentValues_imp_dates.put(COLUMN_IMP_DATES_ASSOCIATED_COURSE, newCourse.getCourseName());
-            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:MM");
+            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:mm");
             String date = sdf.format(imp_dates.get(i));
             contentValues_imp_dates.put(COLUMN_IMP_DATES_DATE, date);
             contentValues_imp_dates.put(COLUMN_IMP_DATES_INFO, imp_dates_info.get(i));
@@ -187,13 +187,58 @@ public class DBHelper extends SQLiteOpenHelper {
 
             }
             else if (res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_COMPONENT)) == "DISCUSSION") {
+                String day = res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_DAYS));
+                String startTime = res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_START_TIME));
+                String endTime = res_schedule.getString(res_courses.getColumnIndex(COLUMN_SCHEDULE_END_TIME));
+                discussions.add(new Course().new Schedule().new Discussion(day, startTime, endTime));
 
             }
             else if (res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_COMPONENT)) == "LAB") {
-
+                String day = res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_DAYS));
+                String startTime = res_schedule.getString(res_schedule.getColumnIndex(COLUMN_SCHEDULE_START_TIME));
+                String endTime = res_schedule.getString(res_courses.getColumnIndex(COLUMN_SCHEDULE_END_TIME));
+                labs.add(new Course().new Schedule().new Lab(day, startTime, endTime));
             }
             res_schedule.moveToNext();
         }
+
+        Course.Schedule schedule = new Course().new Schedule(lectures, discussions, labs);
+        ArrayList<Date> imp_dates = new ArrayList<Date>();
+        ArrayList<String> imp_dates_info = new ArrayList<String>();
+        while (!res_imp_dates.isAfterLast()) {
+            String date = res_imp_dates.getString(res_imp_dates.getColumnIndex(COLUMN_IMP_DATES_DATE));
+            String info = res_imp_dates.getString(res_imp_dates.getColumnIndex(COLUMN_IMP_DATES_INFO));
+            SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-DD HH:mm");
+            Date to_add = (Date) df.parse(date);
+            imp_dates.add(to_add);
+            imp_dates_info.add(info);
+        }
+
+        ArrayList<Course.Office_Hours> office_hours = new ArrayList<>();
+        while(!res_office_hrs.isAfterLast()) {
+            String day = res_office_hrs.getString(res_office_hrs.getColumnIndex(COLUMN_OFFICE_HOURS_DAY));
+            String startTIme = res_office_hrs.getString(res_office_hrs.getColumnIndex(COLUMN_OFFICE_HOURS_START_TIME));
+            String endTime  = res_office_hrs.getString(res_office_hrs.getColumnIndex(COLUMN_OFFICE_HOURS_END_TIME));
+            String instr = res_office_hrs.getString(res_office_hrs.getColumnIndex(COLUMN_OFFICE_HOURS_INSTR_NAME));
+            office_hours.add(new Course().new Office_Hours(day, startTIme, endTime, instr));
+        }
+
+        boolean lec_comp = res_courses.getInt(res_courses.getColumnIndex(COLUMN_LECTURE_COMPONENT)) == 1? true : false;
+        boolean disc_comp = res_courses.getInt(res_courses.getColumnIndex(COLUMN_DISCUSSION_COMPONENT)) == 1? true : false;
+        boolean lab_comp = res_courses.getInt(res_courses.getColumnIndex(COLUMN_LAB_COMPONENT)) == 1? true : false;
+
+        res_imp_dates.close();
+        res_office_hrs.close();
+        res_schedule.close();
+
+        Course toReturn = new Course(course_name, res_courses.getInt(res_courses.getColumnIndex(COLUMN_CREDIT_HRS)), res_courses.getString(res_courses.getColumnIndex(COLUMN_LECTURE_LOCATION)), res_courses.getString(res_courses.getColumnIndex(COLUMN_DISCUSSION_LOCATION)), res_courses.getString(res_courses.getColumnIndex(COLUMN_LAB_LOCATION)), schedule, imp_dates, imp_dates_info, office_hours, lec_comp, disc_comp, lab_comp);
+
+        res_courses.close();
+
+        return toReturn;
+
+
+
 
     }
 

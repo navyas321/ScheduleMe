@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import java.sql.Array;
 import java.sql.Date;
@@ -214,9 +215,24 @@ public class Course {
             this.endTime = endTime;
             this.instructor_name = instructor_name;
         }
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public Office_Hours(String day, String startTime, String endTime, String instructor_name) throws Exception{
+            this.day = dayParser(day);
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            this.startTime = new java.sql.Time(formatter.parse(startTime).getTime());
+            this.endTime = new java.sql.Time(formatter.parse(endTime).getTime());
+            this.instructor_name = instructor_name;
+        }
+
+
+
     }
 
     public class Schedule{
+
+        public Schedule() {
+
+        }
 
         public Schedule(ArrayList<Lecture> lectures, ArrayList<Discussion> discussions, ArrayList<Lab> labs) {
             this.lectures = lectures;
@@ -310,6 +326,14 @@ public class Course {
                 this.StartTime = startTime;
                 this.EndTime = endTime;
             }
+
+            @TargetApi(Build.VERSION_CODES.N)
+            public Discussion(String day, String startTime, String endTime) throws Exception{
+                this.day = dayParser(day);
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+                this.StartTime = new java.sql.Time(formatter.parse(startTime).getTime());
+                this.EndTime = new java.sql.Time(formatter.parse(endTime).getTime());
+            }
         }
 
         public class Lab {
@@ -348,6 +372,14 @@ public class Course {
                 this.day = day;
                 this.StartTime = startTime;
                 this.EndTime = endTime;
+            }
+
+            @TargetApi(Build.VERSION_CODES.N)
+            public Lab(String day, String startTime, String endTime) throws Exception{
+                this.day = dayParser(day);
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+                this.StartTime = new java.sql.Time(formatter.parse(startTime).getTime());
+                this.EndTime = new java.sql.Time(formatter.parse(endTime).getTime());
             }
         }
 
