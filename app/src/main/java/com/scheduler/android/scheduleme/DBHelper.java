@@ -258,6 +258,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public int deleteCourse(String courseName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME_COURSES, COLUMN_COURSE_NAME + " = ? ", new String[] { courseName });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N) //very inefficient
+    public boolean updateCourse(Course updatedCourse, String courseName) {
+        deleteCourse(courseName);
+        insertCourse(updatedCourse);
+        return true;
+    }
+
 
 
 
