@@ -242,6 +242,38 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public ArrayList<String> getCourseList() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res_courses = db.rawQuery("SELECT " + COLUMN_COURSE_NAME + " FROM " + TABLE_NAME_COURSES + "", null);
+        res_courses.moveToFirst();
+        ArrayList<String> courses = new ArrayList<String>();
+
+        while(!res_courses.isAfterLast()) {
+            courses.add(res_courses.getString(res_courses.getColumnIndex(COLUMN_COURSE_NAME)));
+            res_courses.moveToNext();
+        }
+        res_courses.close();
+
+        return courses;
+
+    }
+
+    public int deleteCourse(String courseName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME_COURSES, COLUMN_COURSE_NAME + " = ? ", new String[] { courseName });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N) //very inefficient
+    public boolean updateCourse(Course updatedCourse, String courseName) {
+        deleteCourse(courseName);
+        insertCourse(updatedCourse);
+        return true;
+    }
+
+
+
+
+
 
 
 
