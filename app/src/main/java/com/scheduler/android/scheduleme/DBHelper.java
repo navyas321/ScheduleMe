@@ -270,6 +270,51 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ArrayList<Course.Office_Hours> getOfficeHours(String course_name) throws Exception{
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res_office_hrs = db.rawQuery("SELECT * FROM " + TABLE_NAME_OFFICE_HOURS + " WHERE " + COLUMN_OFFICE_HOURS_ASSOCIATED_COURSE + "=" + course_name + "", null);
+        res_office_hrs.moveToFirst();
+        ArrayList<Course.Office_Hours> office_hours = new ArrayList<>();
+        while(!res_office_hrs.isAfterLast()) {
+            String day = res_office_hrs.getString(res_office_hrs.getColumnIndex(COLUMN_OFFICE_HOURS_DAY));
+            String startTIme = res_office_hrs.getString(res_office_hrs.getColumnIndex(COLUMN_OFFICE_HOURS_START_TIME));
+            String endTime  = res_office_hrs.getString(res_office_hrs.getColumnIndex(COLUMN_OFFICE_HOURS_END_TIME));
+            String instr = res_office_hrs.getString(res_office_hrs.getColumnIndex(COLUMN_OFFICE_HOURS_INSTR_NAME));
+            office_hours.add(new Course().new Office_Hours(day, startTIme, endTime, instr));
+        }
+        return office_hours;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ArrayList<Date> getImpDates(String course_name) throws Exception{
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res_imp_dates = db.rawQuery("SELECT * FROM " + TABLE_NAME_IMP_DATES + " WHERE " + COLUMN_IMP_DATES_ASSOCIATED_COURSE + "=" + course_name + "", null);
+        res_imp_dates.moveToFirst();
+        ArrayList<Date> imp_dates = new ArrayList<Date>();
+        while (!res_imp_dates.isAfterLast()) {
+            String date = res_imp_dates.getString(res_imp_dates.getColumnIndex(COLUMN_IMP_DATES_DATE));
+            SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-DD HH:mm");
+            Date to_add = (Date) df.parse(date);
+            imp_dates.add(to_add);
+        }
+        return imp_dates;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ArrayList<String> getImpDatesCorrInfo(String course_name) throws Exception {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res_imp_dates = db.rawQuery("SELECT * FROM " + TABLE_NAME_IMP_DATES + " WHERE " + COLUMN_IMP_DATES_ASSOCIATED_COURSE + "=" + course_name + "", null);
+        res_imp_dates.moveToFirst();
+        ArrayList<String> imp_dates_info = new ArrayList<String>();
+        while (!res_imp_dates.isAfterLast()) {
+            String info = res_imp_dates.getString(res_imp_dates.getColumnIndex(COLUMN_IMP_DATES_INFO));
+            imp_dates_info.add(info);
+        }
+        return imp_dates_info;
+    }
+
+
 
 
 
