@@ -9,4 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.scheduler.android.scheduleme.ImportantDatesActivity">
 
+    <ListView
+        android:id="@+id/impDatesView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </ListView>
+
 </RelativeLayout>
